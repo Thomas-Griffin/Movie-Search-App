@@ -48,7 +48,7 @@ jobs:
       - name: Docker Login
         env:
           DOCKER_PASSWORD: ${{ steps.auth.outputs.access_token }}
-        run: docker login -u oauth2accesstoken -p $DOCKER_PASSWORD https://$GAR_LOCATION-docker.pkg.dev
+        run: docker login -u oauth2accesstoken --password-stdin $DOCKER_PASSWORD https://$GAR_LOCATION-docker.pkg.dev
 
       # Get the GKE credentials, so we can deploy to the cluster
       - name: Set up GKE credentials
