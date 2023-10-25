@@ -1,0 +1,14 @@
+services:
+  movie-app-backend:
+    build:
+      context: ./backend
+    ports:
+      - "8080:8080"
+
+  movie-app-frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - movie-app-backend
