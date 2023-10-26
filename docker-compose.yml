@@ -4,6 +4,7 @@ services:
       context: ./backend
     ports:
       - "8080:8080"
+    image: movie-app-backend:latest
 
   movie-app-frontend:
     build:
@@ -12,3 +13,4 @@ services:
       - "3000:3000"
     depends_on:
       - movie-app-backend
+    image: movie-app-frontend:latest
