@@ -12,7 +12,7 @@ const MovieMasonryGrid = () => {
         const movies = useRef([] as Movie[]);
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/movies/search?query=${searchTerm}`);
+                const response = await fetch(`${process.env.REACT_APP_API_URL ?? 'http://localhost:8080'}/movies/search?query=${searchTerm}`);
                 if (response.ok) {
                     movies.current = await response.json() as Movie[];
 

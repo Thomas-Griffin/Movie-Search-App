@@ -22,7 +22,7 @@ const MovieSearchBox: React.FC = () => {
             setMovieTitles([]);
             return;
         }
-        const results = await fetch(`http://localhost:8080/movies/search?query=${searchTerm}`)
+        const results = await fetch(`${process.env.REACT_APP_API_URL ?? 'http://localhost:8080'}/movies/search?query=${searchTerm}`)
         const resultsJson = await results.json();
         const movies = resultsJson.map((movie: Movie) => movie.title)
         const moviesSet: Set<string> = new Set(movies);

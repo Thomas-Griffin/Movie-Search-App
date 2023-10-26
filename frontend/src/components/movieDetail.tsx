@@ -10,7 +10,7 @@ const MovieDetail = () => {
     movie.id = urlParams.get('id') ?? '';
     const fetchData = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/movies/${movie.id}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL ?? 'http://localhost:8080'}/movies/${movie.id}`);
             if (response.ok) {
                 movieDetails = await response.json();
             }
