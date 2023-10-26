@@ -31,7 +31,7 @@ const MovieDetail = () => {
                 <Grid item xs={12}>
                     <Paper>
                         <TitleBar/>
-                        <div style={{
+                        <div className={'center-container'} style={{
                             width: '100vw',
                             height: '100vh',
                             maxHeight: '100%',
@@ -58,6 +58,9 @@ const MovieDetail = () => {
                                 <p>Rating: {movieDetails?.vote_average} ({movieDetails?.vote_count} votes)</p>
                                 <p>Adult: {movieDetails?.adult ? 'Yes' : 'No'}</p>
                                 <p>Popularity Score: {movieDetails?.popularity}</p>
+                                <Link to={'/'}>
+                                    <Button>Back</Button>
+                                </Link>
                             </Card>
                         </div>
                     </Paper>
