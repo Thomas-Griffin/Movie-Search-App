@@ -22,5 +22,5 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
           service_account: '${{ secrets.WIF_SERVICE_ACCOUNT }}'
-          credentials: '${{ secrets.GCP_CREDENTIALS }}'
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
