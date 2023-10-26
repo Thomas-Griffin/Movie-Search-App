@@ -1,15 +1,34 @@
-import React from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
+import {Grid, TextField} from '@mui/material';
+import {useDispatch} from "react-redux";
+import {setSearchString} from "../appState";
 
-const MovieSearchBox = (props: { value: string | number | readonly string[] | undefined; setSearchValue: (arg0: string) => void; }) => {
+
+const MovieSearchBox: React.FC = () => {
+    const [searchTerm, setSearchTerm] = useState<string>('');
+
+    const dispatch = useDispatch();
+
+    const handleInputChange = (changeEvent: ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(changeEvent.target.value);
+    };
+
+    useEffect(() => {
+        dispatch(setSearchString(searchTerm));
+    }, [searchTerm, dispatch]);
+
     return (
-        <div className='col col-sm-4'>
-            <input
-                className='form-control'
-                value={props.value}
-                onChange={(event) => props.setSearchValue(event.target.value)}
-                placeholder='Find a movie...'
-            ></input>
-        </div>
+        <Grid container justifyContent="center" alignItems="center">
+            <Grid item xs={12} className={'center-container'} >
+                <TextField
+                    style={{margin: '50px', width: '50%', maxWidth: '600px', minWidth: '300px', }}
+                    variant={"filled"}
+                    label="Search movies..."
+                    value={searchTerm}
+                    onChange={handleInputChange}
+                />
+            </Grid>
+        </Grid>
     );
 };
 

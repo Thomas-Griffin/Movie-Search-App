@@ -85,7 +85,7 @@ export class Movie {
             response.id,
             response.title,
             response.adult,
-            response.backdrop_path,
+            `https://image.tmdb.org/t/p/original/${response.backdrop_path}`,
             response.overview,
             response.popularity,
             genres?.map((movieGenre: MovieGenre) => movieGenre.name) ?? [],

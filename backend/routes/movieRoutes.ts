@@ -3,12 +3,13 @@ import {Request, Response} from "express";
 import {MovieSearchRequest} from "../model/requests/movieSearchRequest";
 import {MovieService} from "../services/movieService";
 import {MovieSearchQueryParameters} from "../model/requests/movieSearchQueryParameters";
+import cacheMiddleware from "../cacheMiddleware";
 
 const router = require('express').Router();
 const movieService: MovieService = new MovieService();
 
 
-router.get('/search', async (request: Request, response: Response) => {
+router.get('/search', cacheMiddleware, async (request: Request, response: Response) => {
     const queryParameters: MovieSearchQueryParameters = {
         query: request.query.query as string ?? '',
         language: request.query.language as string ?? '',
@@ -20,12 +21,14 @@ router.get('/search', async (request: Request, response: Response) => {
     }
 
     const movies: Movie[] = await movieService.getMovies(new MovieSearchRequest(queryParameters));
+    cacheMiddleware.set(request.originalUrl, movies);
     return response.status(200).json(movies);
 });
 
-router.get('/:id', async (request: Request, response: Response) => {
+router.get('/:id', cacheMiddleware, async (request: Request, response: Response) => {
     const {id} = request.params;
     const movie: any = await movieService.getMovieById(id);
+    cacheMiddleware.set(request.originalUrl, movie);
     if (movie?.success === false) {
         return response.status(404).json(movie);
     }

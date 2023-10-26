@@ -9,7 +9,6 @@ export class MovieService {
 
     async getMovies(searchRequest: MovieSearchRequest): Promise<Movie[]> {
         let query = `${this.URL}${MovieServiceEndpoints.searchMovies}?${searchRequest.toQueryString()}&api_key=${this.apiKey}`
-        console.log(query)
         const response = await fetch(query, {method: 'GET', headers: {'accept': 'application/json', 'Authorization': this.authorisationHeader}})
         const responseJson = await response.json()
         if (responseJson?.results?.length && responseJson?.results?.length > 0) {
