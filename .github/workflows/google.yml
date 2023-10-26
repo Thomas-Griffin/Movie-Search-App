@@ -13,16 +13,14 @@ jobs:
       - name: 'Checkout'
         uses: 'actions/checkout@v3'
 
-
       - name: 'Docker Compose'
         run: |
           docker-compose up -d
-
 
       - name: 'Google auth'
         id: 'auth'
         uses: 'google-github-actions/auth@v1'
         with:
-          workload_identity_provider: '${{ secrets.WIF_PROVIDER }}'
           service_account: '${{ secrets.WIF_SERVICE_ACCOUNT }}'
+          credentials: '${{ secrets.GCP_CREDENTIALS }}'
 
