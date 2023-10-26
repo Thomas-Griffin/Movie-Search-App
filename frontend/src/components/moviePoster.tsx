@@ -30,10 +30,6 @@ const MoviePoster = (movie: Movie) => {
                     maxHeight: '300px',
                     minWidth: '100%',
                 }}
-                onError={(e: any) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/500x500?text=No+Poster+Available'
-                }}
             />
         </div>
     );

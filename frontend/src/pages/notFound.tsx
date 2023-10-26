@@ -1,5 +1,6 @@
 import React from 'react';
-import {Grid, Paper, Typography} from "@mui/material";
+import {Button, Grid, Paper, Typography} from "@mui/material";
+import {Link} from "react-router-dom";
 
 function NotFound() {
     return (
@@ -9,6 +10,9 @@ function NotFound() {
                     <Grid container justifyContent="center" alignItems="center">
                         <Grid item>
                             <Typography variant="h2">Page Not Found</Typography>
+                            <div className={'center-container'}>
+                                <Link to={'/'}><Button variant={'contained'}>Homepage</Button></Link>
+                            </div>
                         </Grid>
                     </Grid>
                 </Paper>

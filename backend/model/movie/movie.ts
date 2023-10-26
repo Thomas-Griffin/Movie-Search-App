@@ -85,7 +85,7 @@ export class Movie {
             response.id,
             response.title,
             response.adult,
-            `https://image.tmdb.org/t/p/original/${response.backdrop_path}`,
+            response.backdrop_path === null ? 'https://via.placeholder.com/500x500?text=No+Poster+Available' : `https://image.tmdb.org/t/p/original/${response.backdrop_path}`,
             response.overview,
             response.popularity,
             genres?.map((movieGenre: MovieGenre) => movieGenre.name) ?? [],

@@ -1,31 +1,31 @@
-import React, {useEffect} from "react";
-import {Card, Grid, Paper} from "@mui/material";
+import React from "react";
+import {Button, Card, Grid, Paper} from "@mui/material";
 import TitleBar from "./titleBar";
+import {Link} from "react-router-dom";
 
 let movieDetails: any;
 const MovieDetail = () => {
-        let movie = {id: ''}
-        const urlParams = new URLSearchParams(window.location.search);
-        movie.id = urlParams.get('id') ?? '';
-
-        useEffect(() => {
-            console.log('movie id', movie.id)
-            const fetchData = async () => {
-                try {
-                    const response = await fetch(`http://localhost:8080/movies/${movie.id}`);
-                    if (response.ok) {
-                        movieDetails = await response.json();
-                    }
-                } catch (error) {
-                    console.log(error);
-                }
-            };
-            if (movie.id !== '') {
-                fetchData();
+    let movie = {id: ''}
+    const urlParams = new URLSearchParams(window.location.search);
+    movie.id = urlParams.get('id') ?? '';
+    const fetchData = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/movies/${movie.id}`);
+            if (response.ok) {
+                movieDetails = await response.json();
             }
-        });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    if (movie.id !== '') {
+        fetchData().catch((error) => console.log(error));
+    }
 
-        console.log(movieDetails)
+    console.log(movie.id)
+    console.log(movieDetails)
+
+    if (movieDetails !== undefined) {
         return (
             <Grid container justifyContent="center" alignItems="center" style={{height: '100vh'}}>
                 <Grid item xs={12}>
@@ -64,8 +64,22 @@ const MovieDetail = () => {
                 </Grid>
             </Grid>
         );
+    } else {
+        return (
+            <Grid container justifyContent="center" alignItems="center" style={{height: '100vh'}}>
+                <Grid item xs={12}>
+                    <Paper>
+                        <TitleBar/>
+                        <div className={'center-container'}>
+                            <Link to={'/'}>
+                                <Button>Back</Button>
+                            </Link>
+                        </div>
+                    </Paper>
+                </Grid>
+            </Grid>
+        )
     }
-;
-
+}
 
 export default MovieDetail;
